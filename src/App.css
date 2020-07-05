@@ -1,38 +1,222 @@
-.App {
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: gray;
+  margin: 0px;
+  padding: 0px;
+}
+
+hr {
+  border: 1px solid #dee2e6;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 500px;
+  min-height: 90vh;
+  margin: 0px auto;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.py-10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.my-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-flex,
+.row {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.row-reverse {
+  flex-direction: row-reverse;
+}
+
+.align-item-center {
+  align-items: center;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.flex-space-between {
+  justify-content: space-between;
+}
+
+.flex-space-around {
+  justify-content: space-around;
+}
+
+.over-flow-hidden,
+.text-ellipsis {
+  overflow: hidden;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-primary {
+  color: #007bff;
+}
+
+a .text-primary:hover,
+a .text-primary:focus {
+  color: #0056b3;
+}
+
+a .text-success:hover,
+a .text-success:focus {
+  color: #19692c;
+}
+
+.text-success {
+  color: #28a745;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+.text-light {
+  color: #f8f9fa;
+}
+
+.bg-dark {
+  background-color: #343a40 !important;
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+}
+.buttons a {
+  padding: 15px;
+  margin: 0px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.buttons p {
+  font-size: 1rem;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.invalid-feedback {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.input-group {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: 10px 0px;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.input-group input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  width: auto;
+}
+
+/* Modal */
+
+#img-modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 0;
+  width: 100%;
+  max-width: 500px;
+  height: 100vh;
+  z-index: 1;
+}
+
+.modal-wrapper {
+  height: 100%;
+  width: 100%;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.modal-container {
+  padding: 30px 20px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 300px;
+  background-color: #fff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.modal-container h1 {
+  font-size: 2rem;
+  margin: 0px;
+}
+
+.modal-container .buttons button {
+  width: 100%;
+  margin: 2px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid #a7a9ac;
+  background-color: transparent;
+  cursor: pointer;
+}
+.modal-container .buttons button:hover {
+  background-color: #dee2e6;
+}
+
+.modal-container .buttons .btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.modal-container .buttons .btn-primary:hover {
+  color: #fff;
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+.modal-container .buttons .btn-success {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.modal-container .buttons .btn-success:hover {
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
