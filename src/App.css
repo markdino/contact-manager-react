@@ -79,6 +79,10 @@ a {
   white-space: nowrap;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .text-primary {
   color: #007bff;
 }

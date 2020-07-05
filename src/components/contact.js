@@ -13,7 +13,7 @@ const Contact = ({ contact, user, loading, onDelete }) => {
           ? contact.map(person => (
             <List person={person} key={person._id} user={user} onDelete={onDelete} />
           ))
-          : "Contact is empty"}
+          : <p className='text-center text-muted'>Contact is empty</p>}
     </div>
   );
 }
