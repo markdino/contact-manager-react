@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 import { ReactComponent as Close } from '../assets/svg/times.svg'
 
 class LogForm extends Component {
@@ -33,7 +34,7 @@ class LogForm extends Component {
         const { username, password, form } = this.state
         Axios.post(`http://localhost:1234/api/user/${form}`, { username, password }, { withCredentials: 'include' })
             .then(payload => {
-                console.log(payload)
+                toast.success(payload.data.name)
                 this.props.setUser(payload.data.value)
                 this.close()
             })
@@ -65,65 +66,74 @@ class LogForm extends Component {
             margin: '-20px -10px 0px 0px'
         }
         return (
-            <section id="img-modal">
-                <section className="row align-item-center modal-wrapper">
-                    <main className="modal-container">
-                        <section className="d-flex row-reverse">
-                            <Close style={closeStyle} onClick={this.close} />
-                        </section>
-                        <header className="row flex-space-between">
-                            <h1
-                                className={form === 'signup' ? 'text-primary' : 'text-muted cursor-pointer'}
-                                onClick={() => this.setState({ form: 'signup' })}
-                            >
-                                Sign Up
-                            </h1>
-                            <h1 className="text-muted">|</h1>
-                            <h1
-                                className={form === 'login' ? 'text-success' : 'text-muted cursor-pointer'}
-                                onClick={() => this.setState({ form: 'login' })}
-                            >
-                                Login
-                            </h1>
-                        </header>
-                        <form onSubmit={this.onSubmit}>
-                            <section className="input-group">
-                                <label htmlFor="username">Username</label>
-                                <input
-                                    type="username"
-                                    name="username"
-                                    id="username"
-                                    value={username}
-                                    onChange={this.onChange}
-                                    required
-                                />
+            <React.Fragment>
+                <ToastContainer
+                    position='top-center'
+                    autoClose={5000}
+                    closeOnClick
+                    pauseOnFocusLoss
+                    pauseOnHover
+                />
+                <section id="img-modal">
+                    <section className="row align-item-center modal-wrapper">
+                        <main className="modal-container">
+                            <section className="d-flex row-reverse">
+                                <Close style={closeStyle} onClick={this.close} />
                             </section>
-                            <section className="input-group">
-                                <label htmlFor="password">Password</label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    value={password}
-                                    onChange={this.onChange}
-                                    required
-                                />
-                            </section>
-                            <section className='invalid-feedback'>
-                                {(response) ? response.error : ''}
-                            </section>
-                            <section className="buttons">
-                                <button
-                                    type="submit"
-                                    className={form === 'signup' ? 'btn-primary' : 'btn-success'}
+                            <header className="row flex-space-between">
+                                <h1
+                                    className={form === 'signup' ? 'text-primary' : 'text-muted cursor-pointer'}
+                                    onClick={() => this.setState({ form: 'signup' })}
                                 >
-                                    {form}
-                                </button>
-                            </section>
-                        </form>
-                    </main>
+                                    Sign Up
+                            </h1>
+                                <h1 className="text-muted">|</h1>
+                                <h1
+                                    className={form === 'login' ? 'text-success' : 'text-muted cursor-pointer'}
+                                    onClick={() => this.setState({ form: 'login' })}
+                                >
+                                    Login
+                            </h1>
+                            </header>
+                            <form onSubmit={this.onSubmit}>
+                                <section className="input-group">
+                                    <label htmlFor="username">Username</label>
+                                    <input
+                                        type="username"
+                                        name="username"
+                                        id="username"
+                                        value={username}
+                                        onChange={this.onChange}
+                                        required
+                                    />
+                                </section>
+                                <section className="input-group">
+                                    <label htmlFor="password">Password</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        value={password}
+                                        onChange={this.onChange}
+                                        required
+                                    />
+                                </section>
+                                <section className='invalid-feedback'>
+                                    {(response) ? response.error : ''}
+                                </section>
+                                <section className="buttons">
+                                    <button
+                                        type="submit"
+                                        className={form === 'signup' ? 'btn-primary' : 'btn-success'}
+                                    >
+                                        {form}
+                                    </button>
+                                </section>
+                            </form>
+                        </main>
+                    </section>
                 </section>
-            </section>
+            </React.Fragment>
         );
     }
 }
