@@ -1,0 +1,65 @@
+.contacts {
+  overflow-y: auto;
+  height: 100vh;
+  min-height: 100vh;
+}
+#contact-list:hover {
+  background-color: rgb(210, 248, 255);
+}
+
+.avatar-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: burlywood;
+  margin: 0px 5px;
+}
+
+.avatar-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+  width: 100%;
+  padding: 10px 0px;
+  text-decoration: none;
+  color: unset;
+}
+
+.delete {
+  margin-left: 10px;
+}
+.delete,
+#search-btn,
+#add-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-svg {
+  height: 30px;
+  fill: #dc3545;
+}
+
+.delete-svg:hover {
+  fill: #b42634;
+}
+
+.delete-muted {
+  cursor: default;
+}
+
+.muted-svg {
+  fill: #a7a9ac !important;
+}
