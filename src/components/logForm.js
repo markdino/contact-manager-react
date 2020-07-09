@@ -32,7 +32,7 @@ class LogForm extends Component {
         e.preventDefault();
 
         const { username, password, form } = this.state
-        Axios.post(`http://localhost:1234/api/user/${form}`, { username, password }, { withCredentials: 'include' })
+        Axios.post(`${this.props.api}user/${form}`, { username, password }, { withCredentials: 'include' })
             .then(payload => {
                 toast.success(payload.data.name, { autoClose: 2500 })
                 this.props.setUser(payload.data.value)

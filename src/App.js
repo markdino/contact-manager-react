@@ -9,6 +9,7 @@ import TopBar from './components/topBar';
 import LogForm from './components/logForm';
 
 Axios.defaults.withCredentials = true
+const apiBaseUri = process.env.REACT_APP_API_BASE_URI
 
 class App extends Component {
   state = {
@@ -50,7 +51,7 @@ class App extends Component {
   }
 
   handleLogout = () => {
-    Axios.get('http://localhost:1234/api/user/logout')
+    Axios.get(`${apiBaseUri}user/logout`)
       .then(() => {
         this.setUser(null)
         toast.info('User had Logout', { autoClose: 2500 })
@@ -64,7 +65,7 @@ class App extends Component {
 
 
   getContact = query => {
-    const apiRoute = `http://localhost:1234/api/${query ? `search?name=${query}` : ''}`
+    const apiRoute = `${apiBaseUri}${query ? `search?name=${query}` : ''}`
 
     const setContact = payload => {
       if (!payload)
@@ -84,13 +85,13 @@ class App extends Component {
   }
 
   getCurrentUser = () => {
-    Axios.get('http://localhost:1234/api/user/me')
+    Axios.get(`${apiBaseUri}user/me`)
       .then(user => { this.setState({ user: user.data.value }) })
       .catch(() => { this.setState({ user: null }) })
   }
 
   handleDelete = id => {
-    Axios.delete(`http://localhost:1234/api/contact/${id}`)
+    Axios.delete(`${apiBaseUri}contact/${id}`)
       .then(payload => {
         const deletedContact = payload.data.value
         const newContact = this.state.contact.filter(user => user._id !== deletedContact._id)
@@ -129,7 +130,12 @@ class App extends Component {
             pauseOnHover
           />
           {this.state.showLogForm
-            ? <LogForm setUser={this.setUser} onClose={this.toggleForm} form={logForm} />
+            ? <LogForm
+              setUser={this.setUser}
+              onClose={this.toggleForm}
+              form={logForm}
+              api={apiBaseUri}
+            />
             : null}
           <TopBar user={user} toggleForm={this.toggleForm} logOut={this.handleLogout} />
           <Switch>
