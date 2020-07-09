@@ -17,7 +17,7 @@ class App extends Component {
     name: null,
     status: null,
     user: null,
-    loading: true,
+    loading: false,
     showLogForm: false,
     logForm: 'login'
   };
@@ -62,8 +62,11 @@ class App extends Component {
     this.setState({ user })
   }
 
-  getContact = () => {
-    const setResponse = payload => {
+
+  getContact = query => {
+    const apiRoute = `http://localhost:1234/api/${query ? `search?name=${query}` : ''}`
+
+    const setContact = payload => {
       if (!payload)
         return this.serverIsDown();
 
@@ -71,10 +74,11 @@ class App extends Component {
       this.setState({ contact: value, error, name, status: payload.status, loading: false })
     }
 
-    Axios.get('http://localhost:1234/api')
-      .then(payload => setResponse(payload))
+    this.setState({ loading: true })
+    Axios.get(apiRoute)
+      .then(payload => setContact(payload))
       .catch(payload => {
-        setResponse(payload.response)
+        setContact(payload.response)
         toast[this.toastType(this.state.status)](this.state.error)
       })
   }
@@ -138,6 +142,7 @@ class App extends Component {
                   user={user}
                   loading={loading}
                   onDelete={this.handleDelete}
+                  getContact={this.getContact}
                   {...props} />
               )}
             />
