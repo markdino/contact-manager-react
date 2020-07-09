@@ -39,9 +39,7 @@
 .delete {
   margin-left: 10px;
 }
-.delete,
-#search-btn,
-#add-btn {
+.delete {
   background-color: transparent;
   border: none;
   cursor: pointer;
