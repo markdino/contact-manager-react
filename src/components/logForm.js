@@ -34,7 +34,7 @@ class LogForm extends Component {
         const { username, password, form } = this.state
         Axios.post(`http://localhost:1234/api/user/${form}`, { username, password }, { withCredentials: 'include' })
             .then(payload => {
-                toast.success(payload.data.name)
+                toast.success(payload.data.name, { autoClose: 2500 })
                 this.props.setUser(payload.data.value)
                 this.close()
             })
@@ -105,6 +105,7 @@ class LogForm extends Component {
                                         value={username}
                                         onChange={this.onChange}
                                         required
+                                        autoFocus
                                     />
                                 </section>
                                 <section className="input-group">
