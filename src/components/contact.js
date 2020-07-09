@@ -1,20 +1,28 @@
 import React from "react";
+import Search from './search'
 import List from "../components/list";
 import Loading from './loading'
 
 
-const Contact = ({ contact, user, loading, onDelete }) => {
+const Contact = ({ contact, user, loading, onDelete, getContact }) => {
+  let contacts = ''
+  if (typeof contact === 'string') {
+    contacts = <p className='text-center text-muted'>{contact}</p>
+  } else if (contact === null || contact.length < 1) {
+    contacts = <p className='text-center text-muted'>Contact is empty</p>
+  } else {
+    contacts = contact.map(person => (
+      <List person={person} key={person._id} user={user} onDelete={onDelete} />
+    ))
+  }
 
   return (
-    <div className="container p-10">
-      {loading
-        ? <Loading />
-        : contact
-          ? contact.map(person => (
-            <List person={person} key={person._id} user={user} onDelete={onDelete} />
-          ))
-          : <p className='text-center text-muted'>Contact is empty</p>}
-    </div>
+    <React.Fragment>
+      <Search onSearch={getContact} />
+      <div className="container p-10">
+        {loading ? <Loading /> : contacts}
+      </div>
+    </React.Fragment>
   );
 }
 
