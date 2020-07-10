@@ -4,7 +4,7 @@ import Axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
-import Contact from "./components/contact";
+import Contacts from "./components/contacts";
 import TopBar from './components/topBar';
 import LogForm from './components/logForm';
 
@@ -143,7 +143,7 @@ class App extends Component {
               path='/'
               exact
               render={props => (
-                <Contact
+                <Contacts
                   contact={contact}
                   user={user}
                   loading={loading}
