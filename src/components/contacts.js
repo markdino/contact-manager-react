@@ -1,10 +1,9 @@
 import React from "react";
-import Search from './search'
 import List from "./list";
 import Loading from './loading'
 
 
-const Contacts = ({ contact, user, loading, onDelete, getContact }) => {
+const Contacts = ({ contact, user, loading, onDelete }) => {
   let contacts = ''
   if (typeof contact === 'string') {
     contacts = <p className='text-center text-muted'>{contact}</p>
@@ -17,12 +16,9 @@ const Contacts = ({ contact, user, loading, onDelete, getContact }) => {
   }
 
   return (
-    <React.Fragment>
-      <Search onSearch={getContact} />
-      <div className="container p-10">
-        {loading ? <Loading /> : contacts}
-      </div>
-    </React.Fragment>
+    <div className="container p-10">
+      {loading ? <Loading /> : contacts}
+    </div>
   );
 }
 

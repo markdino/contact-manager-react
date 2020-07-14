@@ -7,6 +7,7 @@ import "./App.css";
 import Contacts from "./components/contacts";
 import TopBar from './components/topBar';
 import LogForm from './components/logForm';
+import Search from './components/search'
 
 Axios.defaults.withCredentials = true
 const apiBaseUri = process.env.REACT_APP_API_BASE_URI
@@ -138,21 +139,27 @@ class App extends Component {
             />
             : null}
           <TopBar user={user} toggleForm={this.toggleForm} logOut={this.handleLogout} />
-          <Switch>
-            <Route
-              path='/'
-              exact
-              render={props => (
-                <Contacts
-                  contact={contact}
-                  user={user}
-                  loading={loading}
-                  onDelete={this.handleDelete}
-                  getContact={this.getContact}
-                  {...props} />
-              )}
-            />
-          </Switch>
+          <Route
+            path='/'
+            exact
+            render={props => (
+              <Search
+                onSearch={this.getContact}
+                {...props} />
+            )}
+          />
+          <Route
+            path='/'
+            exact
+            render={props => (
+              <Contacts
+                contact={contact}
+                user={user}
+                loading={loading}
+                onDelete={this.handleDelete}
+                {...props} />
+            )}
+          />
         </main>
       </Router>
     );
