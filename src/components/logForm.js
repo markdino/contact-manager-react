@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+import Modal from './modal'
 import Input from './input'
-import { ReactComponent as Close } from '../assets/svg/times.svg';
 
 class LogForm extends Component {
     state = {
@@ -59,13 +59,6 @@ class LogForm extends Component {
 
     render() {
         const { username, password, response, form } = this.state
-        const closeStyle = {
-            width: '10px',
-            fill: '#6c757d',
-            padding: '10px',
-            cursor: 'pointer',
-            margin: '-20px -10px 0px 0px'
-        }
         return (
             <React.Fragment>
                 <ToastContainer
@@ -75,61 +68,54 @@ class LogForm extends Component {
                     pauseOnFocusLoss
                     pauseOnHover
                 />
-                <section id="img-modal">
-                    <section className="row align-item-center modal-wrapper">
-                        <main className="modal-container">
-                            <section className="d-flex row-reverse">
-                                <Close style={closeStyle} onClick={this.close} />
-                            </section>
-                            <header className="row flex-space-between">
-                                <h1
-                                    className={form === 'signup' ? 'text-primary' : 'text-muted cursor-pointer'}
-                                    onClick={() => this.setState({ form: 'signup' })}
-                                >
-                                    Sign Up
+                <Modal onClose={this.close} >
+                    <header className="row flex-space-between">
+                        <h1
+                            className={form === 'signup' ? 'text-primary' : 'text-muted cursor-pointer'}
+                            onClick={() => this.setState({ form: 'signup' })}
+                        >
+                            Sign Up
                             </h1>
-                                <h1 className="text-muted">|</h1>
-                                <h1
-                                    className={form === 'login' ? 'text-success' : 'text-muted cursor-pointer'}
-                                    onClick={() => this.setState({ form: 'login' })}
-                                >
-                                    Login
+                        <h1 className="text-muted">|</h1>
+                        <h1
+                            className={form === 'login' ? 'text-success' : 'text-muted cursor-pointer'}
+                            onClick={() => this.setState({ form: 'login' })}
+                        >
+                            Login
                             </h1>
-                            </header>
-                            <form onSubmit={this.onSubmit}>
-                                <Input
-                                    label='Username'
-                                    name='username'
-                                    id='username'
-                                    value={username}
-                                    onChange={this.onChange}
-                                    required
-                                    autoFocus
-                                />
-                                <Input
-                                    label='Password'
-                                    name='password'
-                                    id='password'
-                                    type='password'
-                                    value={password}
-                                    onChange={this.onChange}
-                                    required
-                                />
-                                <section className='invalid-feedback'>
-                                    {(response) ? response.error : ''}
-                                </section>
-                                <section className="buttons">
-                                    <button
-                                        type="submit"
-                                        className={form === 'signup' ? 'btn-primary' : 'btn-success'}
-                                    >
-                                        {form}
-                                    </button>
-                                </section>
-                            </form>
-                        </main>
-                    </section>
-                </section>
+                    </header>
+                    <form onSubmit={this.onSubmit}>
+                        <Input
+                            label='Username'
+                            name='username'
+                            id='username'
+                            value={username}
+                            onChange={this.onChange}
+                            required
+                            autoFocus
+                        />
+                        <Input
+                            label='Password'
+                            name='password'
+                            id='password'
+                            type='password'
+                            value={password}
+                            onChange={this.onChange}
+                            required
+                        />
+                        <section className='invalid-feedback'>
+                            {(response) ? response.error : ''}
+                        </section>
+                        <section className="buttons">
+                            <button
+                                type="submit"
+                                className={form === 'signup' ? 'btn-primary' : 'btn-success'}
+                            >
+                                {form}
+                            </button>
+                        </section>
+                    </form>
+                </Modal>
             </React.Fragment>
         );
     }
