@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
-import { ReactComponent as Close } from '../assets/svg/times.svg'
+import Input from './input'
+import { ReactComponent as Close } from '../assets/svg/times.svg';
 
 class LogForm extends Component {
     state = {
@@ -96,29 +97,24 @@ class LogForm extends Component {
                             </h1>
                             </header>
                             <form onSubmit={this.onSubmit}>
-                                <section className="input-group">
-                                    <label htmlFor="username">Username</label>
-                                    <input
-                                        type="username"
-                                        name="username"
-                                        id="username"
-                                        value={username}
-                                        onChange={this.onChange}
-                                        required
-                                        autoFocus
-                                    />
-                                </section>
-                                <section className="input-group">
-                                    <label htmlFor="password">Password</label>
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        id="password"
-                                        value={password}
-                                        onChange={this.onChange}
-                                        required
-                                    />
-                                </section>
+                                <Input
+                                    label='Username'
+                                    name='username'
+                                    id='username'
+                                    value={username}
+                                    onChange={this.onChange}
+                                    required
+                                    autoFocus
+                                />
+                                <Input
+                                    label='Password'
+                                    name='password'
+                                    id='password'
+                                    type='password'
+                                    value={password}
+                                    onChange={this.onChange}
+                                    required
+                                />
                                 <section className='invalid-feedback'>
                                     {(response) ? response.error : ''}
                                 </section>
