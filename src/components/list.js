@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 import { ReactComponent as DeleteSvg } from "../assets/svg/trash.svg";
 import { ReactComponent as UserSvg } from "../assets/svg/user.svg";
 import "./list.css";
@@ -14,9 +15,9 @@ const List = props => {
             <UserSvg className="avatar-img" />
           )}
       </section>
-      <a className="name" href={`/contact/${_id}`}>
+      <Link className="name" to={`/contact/${_id}`}>
         {name}
-      </a>
+      </Link>
       <section>
         {!props.user || props.user._id !== owner
           ? <button className="delete delete-muted" title="Delete disabled" >
