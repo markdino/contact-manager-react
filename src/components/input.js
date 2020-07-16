@@ -1,13 +1,15 @@
 import React from 'react';
 import './input.css'
 
-const Input = ({ label, id, value, ...attributes }) => {
+const Input = ({ label, id, name, value, ...attributes }) => {
+    const newId = id ? id : name
     return (
         <section className="input-group">
-            <label htmlFor={id}>{label}</label>
+            <label htmlFor={newId}>{label}</label>
             <input
                 {...attributes}
-                id={id}
+                id={newId}
+                name={name}
                 value={value}
             />
         </section>
