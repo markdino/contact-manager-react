@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Input from './input'
 import { ReactComponent as CameraSVG } from '../assets/svg/camera.svg'
 import UserSVG from '../assets/svg/user.svg'
 import './contactForm.css'
@@ -32,6 +33,20 @@ class ContactFrom extends Component {
                 <section className="thumbnail-holder">
                     <img src={userAvatar} alt="profile avatar" id="img-avatar" />
                 </section>
+
+                <main class="p-10">
+                    <form>
+                        <section class="input-group row">
+                            <input type="checkbox" id="private" name="private" checked />
+                            <label for="private">Private</label>
+                        </section>
+                        <Input label='Name' name='name' required />
+                        <Input label='Mobile' type='tel' name='mobile' />
+                        <Input label='Tel.' type='tel' name='tel' />
+                        <Input label='Email' type='email' name='email' />
+                        <Input label='Address' name='address' />
+                    </form>
+                </main>
             </React.Fragment>
         );
     }
