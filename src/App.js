@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,7 +7,8 @@ import "./App.css";
 import Contacts from "./components/contacts";
 import TopBar from './components/topBar';
 import LogForm from './components/logForm';
-import Search from './components/search'
+import Search from './components/search';
+import ContactForm from './components/contactFrom'
 
 Axios.defaults.withCredentials = true
 const apiBaseUri = process.env.REACT_APP_API_BASE_URI
@@ -160,6 +161,7 @@ class App extends Component {
                 {...props} />
             )}
           />
+          <Route path='/contact/:id' component={ContactForm} />
         </main>
       </Router>
     );
