@@ -33,7 +33,7 @@ class ContactFrom extends Component {
     render() {
         const { avatar, isPrivate, name, mobile, tel, email, address, showModal } = this.state
         const userAvatar = avatar ? avatar : UserSVG
-        const privateCheck = isPrivate ? { checked: true } : null
+        const privateCheck = isPrivate ? { defaultChecked: true } : null
         return (
             <React.Fragment>
                 <section className="thumbnail-details">
