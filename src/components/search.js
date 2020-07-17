@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { ReactComponent as SearchSVG } from '../assets/svg/search.svg'
 import { ReactComponent as AddSVG } from '../assets/svg/plus.svg'
 import './search.css'
@@ -21,9 +22,9 @@ const Search = ({ onSearch }) => {
                     </button>
                 </section>
             </section>
-            <a id="add-btn" className="row" title="Add new contact" href="/contact/create">
+            <Link id="add-btn" className="row" title="Add new contact" to="/contact/add">
                 <AddSVG className="add-svg" />
-            </a>
+            </Link>
         </nav>
     );
 }
