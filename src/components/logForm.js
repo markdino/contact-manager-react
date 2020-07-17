@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Axios from "axios";
+import Http from '../http';
 import { ToastContainer, toast } from 'react-toastify';
 import Modal from './modal'
 import Input from './input'
@@ -33,7 +33,7 @@ class LogForm extends Component {
         e.preventDefault();
 
         const { username, password, form } = this.state
-        Axios.post(`${this.props.api}user/${form}`, { username, password }, { withCredentials: 'include' })
+        Http.post(`${this.props.api}/user/${form}`, { username, password })
             .then(payload => {
                 toast.success(payload.data.name, { autoClose: 2500 })
                 this.props.setUser(payload.data.value)

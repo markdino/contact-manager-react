@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Axios from "axios";
+import Http from './http'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
@@ -10,7 +10,6 @@ import LogForm from './components/logForm';
 import Search from './components/search';
 import ContactForm from './components/contactFrom'
 
-Axios.defaults.withCredentials = true
 const apiBaseUri = process.env.REACT_APP_API_BASE_URI
 
 class App extends Component {
@@ -53,7 +52,7 @@ class App extends Component {
   }
 
   handleLogout = () => {
-    Axios.get(`${apiBaseUri}user/logout`)
+    Http.get(`${apiBaseUri}/user/logout`)
       .then(() => {
         this.setUser(null)
         toast.info('User had Logout', { autoClose: 2500 })
@@ -67,7 +66,7 @@ class App extends Component {
 
 
   getContact = query => {
-    const apiRoute = `${apiBaseUri}${query ? `search?name=${query}` : ''}`
+    const apiRoute = `${apiBaseUri}/${query ? `search?name=${query}` : ''}`
 
     const setContact = payload => {
       if (!payload)
@@ -78,7 +77,7 @@ class App extends Component {
     }
 
     this.setState({ loading: true })
-    Axios.get(apiRoute)
+    Http.get(apiRoute)
       .then(payload => setContact(payload))
       .catch(payload => {
         setContact(payload.response)
@@ -87,13 +86,13 @@ class App extends Component {
   }
 
   getCurrentUser = () => {
-    Axios.get(`${apiBaseUri}user/me`)
+    Http.get(`${apiBaseUri}/user/me`)
       .then(user => { this.setState({ user: user.data.value }) })
       .catch(() => { this.setState({ user: null }) })
   }
 
   handleDelete = id => {
-    Axios.delete(`${apiBaseUri}contact/${id}`)
+    Http.delete(`${apiBaseUri}/contact/${id}`)
       .then(payload => {
         const deletedContact = payload.data.value
         const newContact = this.state.contact.filter(user => user._id !== deletedContact._id)
@@ -119,7 +118,6 @@ class App extends Component {
   }
   render() {
     const { contact, user, loading, logForm } = this.state
-    console.log(this.state)
 
     return (
       <Router>
@@ -161,7 +159,13 @@ class App extends Component {
                 {...props} />
             )}
           />
-          <Route path='/contact/:id' component={ContactForm} />
+          <Route
+            path='/contact/add'
+            render={props => <ContactForm
+              user={user}
+              api={apiBaseUri}
+              {...props}
+            />} />
         </main>
       </Router>
     );
