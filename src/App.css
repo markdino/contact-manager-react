@@ -46,11 +46,11 @@ a {
 }
 
 .row {
-  flex-direction: row;
+  flex-direction: row !important;
 }
 
 .row-reverse {
-  flex-direction: row-reverse;
+  flex-direction: row-reverse !important;
 }
 
 .align-item-center {
@@ -115,17 +115,6 @@ a .text-success:focus {
 .buttons {
   display: flex;
   width: 100%;
-}
-.buttons a {
-  padding: 15px;
-  margin: 0px;
-  width: 100%;
-  font-size: 1rem;
-}
-
-.buttons p {
-  font-size: 1rem;
-  text-align: center;
 }
 
 .invalid-feedback {
