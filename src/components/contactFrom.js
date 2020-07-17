@@ -82,7 +82,7 @@ class ContactFrom extends Component {
                                 {...privateCheck}
                                 onClick={() => this.setState({ isPrivate: !this.state.isPrivate })}
                             />
-                            <label for="private">Private</label>
+                            <label htmlFor="private">Private</label>
                         </section>
                         <Input label='Name' name='name' value={name} onChange={this.onChange} required />
                         <Input label='Mobile' type='tel' name='mobile' value={mobile} onChange={this.onChange} />
