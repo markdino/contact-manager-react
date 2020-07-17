@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from './input'
 import Modal from './modal'
+import Http from '../http'
 import { ReactComponent as CameraSVG } from '../assets/svg/camera.svg'
 import UserSVG from '../assets/svg/user.svg'
 import './contactForm.css'
@@ -30,6 +31,33 @@ class ContactFrom extends Component {
     onToggleModal = () => {
         this.setState({ showModal: !this.state.showModal })
     }
+
+    onSubmit = e => {
+        e.preventDefault()
+        const { avatar, isPrivate, name, mobile, tel, email, address } = this.state
+        const { user, api, updateContact, history } = this.props
+
+        const newContact = {
+            avatar,
+            private: isPrivate,
+            name,
+            mobile,
+            tel,
+            email,
+            address,
+            owner: user
+        }
+
+        Http.post(`${api}/contact`, newContact)
+            .then(() => {
+                updateContact()
+                history.push('/')
+            })
+            .catch(payload => {
+                if (!payload.response) return console.log(payload)
+                console.error(payload.response.data.error)
+            })
+    }
     render() {
         const { avatar, isPrivate, name, mobile, tel, email, address, showModal } = this.state
         const userAvatar = avatar ? avatar : UserSVG
@@ -38,10 +66,10 @@ class ContactFrom extends Component {
             <React.Fragment>
                 <section className="thumbnail-details">
                     <section className="buttons">
-                        <button id="cancel-btn">
+                        <button id="cancel-btn" onClick={this.props.history.goBack}>
                             <p>Cancel</p>
                         </button>
-                        <button id="save-btn">
+                        <button id="save-btn" onClick={this.onSubmit}>
                             <p>Save</p>
                         </button>
                     </section>
@@ -73,7 +101,7 @@ class ContactFrom extends Component {
                     </Modal>
                     : null}
                 <main className="p-10">
-                    <form>
+                    <form onSubmit={this.onSubmit}>
                         <section className="input-group row">
                             <input
                                 type="checkbox"

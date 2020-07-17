@@ -164,6 +164,7 @@ class App extends Component {
             render={props => <ContactForm
               user={user}
               api={apiBaseUri}
+              updateContact={this.getContact}
               {...props}
             />} />
         </main>
