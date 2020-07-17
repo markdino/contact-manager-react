@@ -10,7 +10,7 @@ const Input = ({ label, id, name, value, ...attributes }) => {
                 {...attributes}
                 id={newId}
                 name={name}
-                value={value}
+                value={value ? value : ''}
             />
         </section>
     );
