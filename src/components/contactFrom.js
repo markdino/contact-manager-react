@@ -6,12 +6,22 @@ import './contactForm.css'
 
 class ContactFrom extends Component {
     state = {
-        avatar: null
+        avatar: null,
+        isPrivate: true,
+        name: null,
+        mobile: null,
+        tel: null,
+        email: null,
+        address: null
+    }
+
+    onChange = e => {
+        this.setState({ [e.target.name]: e.target.value })
     }
     render() {
-        const { avatar } = this.state
+        const { avatar, isPrivate, name, mobile, tel, email, address } = this.state
         const userAvatar = avatar ? avatar : UserSVG
-        console.log(userAvatar)
+        const privateCheck = isPrivate ? { checked: true } : null
         return (
             <React.Fragment>
                 <section className="thumbnail-details">
@@ -37,14 +47,20 @@ class ContactFrom extends Component {
                 <main class="p-10">
                     <form>
                         <section class="input-group row">
-                            <input type="checkbox" id="private" name="private" checked />
+                            <input
+                                type="checkbox"
+                                id="private"
+                                name="private"
+                                {...privateCheck}
+                                onClick={() => this.setState({ isPrivate: !this.state.isPrivate })}
+                            />
                             <label for="private">Private</label>
                         </section>
-                        <Input label='Name' name='name' required />
-                        <Input label='Mobile' type='tel' name='mobile' />
-                        <Input label='Tel.' type='tel' name='tel' />
-                        <Input label='Email' type='email' name='email' />
-                        <Input label='Address' name='address' />
+                        <Input label='Name' name='name' value={name} onChange={this.onChange} required />
+                        <Input label='Mobile' type='tel' name='mobile' value={mobile} onChange={this.onChange} />
+                        <Input label='Tel.' type='tel' name='tel' value={tel} onChange={this.onChange} />
+                        <Input label='Email' type='email' name='email' value={email} onChange={this.onChange} />
+                        <Input label='Address' name='address' value={address} onChange={this.onChange} />
                     </form>
                 </main>
             </React.Fragment>
