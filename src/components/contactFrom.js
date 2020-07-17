@@ -72,9 +72,9 @@ class ContactFrom extends Component {
                         </section>
                     </Modal>
                     : null}
-                <main class="p-10">
+                <main className="p-10">
                     <form>
-                        <section class="input-group row">
+                        <section className="input-group row">
                             <input
                                 type="checkbox"
                                 id="private"
