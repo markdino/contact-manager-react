@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Input from './input'
+import Modal from './modal'
 import { ReactComponent as CameraSVG } from '../assets/svg/camera.svg'
 import UserSVG from '../assets/svg/user.svg'
 import './contactForm.css'
@@ -7,19 +8,30 @@ import './contactForm.css'
 class ContactFrom extends Component {
     state = {
         avatar: null,
+        newAvatar: null,
         isPrivate: true,
         name: null,
         mobile: null,
         tel: null,
         email: null,
-        address: null
+        address: null,
+        showModal: false,
+    }
+
+    acceptAvatar = () => {
+        this.setState({ avatar: this.state.newAvatar })
+        this.onToggleModal()
     }
 
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
+
+    onToggleModal = () => {
+        this.setState({ showModal: !this.state.showModal })
+    }
     render() {
-        const { avatar, isPrivate, name, mobile, tel, email, address } = this.state
+        const { avatar, isPrivate, name, mobile, tel, email, address, showModal } = this.state
         const userAvatar = avatar ? avatar : UserSVG
         const privateCheck = isPrivate ? { checked: true } : null
         return (
@@ -34,7 +46,7 @@ class ContactFrom extends Component {
                         </button>
                     </section>
 
-                    <button className='camera-btn cursor-pointer'>
+                    <button className='camera-btn cursor-pointer' onClick={this.onToggleModal}>
                         <section id="add-photo" className="row">
                             <CameraSVG className='camera-svg' />
                         </section>
@@ -43,7 +55,23 @@ class ContactFrom extends Component {
                 <section className="thumbnail-holder">
                     <img src={userAvatar} alt="profile avatar" id="img-avatar" />
                 </section>
-
+                {showModal
+                    ? <Modal onClose={this.onToggleModal}>
+                        <Input
+                            label='Image link'
+                            name='newAvatar'
+                            placeholder="https://"
+                            required
+                            autoFocus
+                            defaultValue={avatar}
+                            onChange={this.onChange} />
+                        <section className="buttons">
+                            <button className='btn-success' onClick={this.acceptAvatar}>
+                                Accept Image
+                            </button>
+                        </section>
+                    </Modal>
+                    : null}
                 <main class="p-10">
                     <form>
                         <section class="input-group row">
