@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Http from '../http';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Modal from './modal'
 import Input from './input'
 import InvalidFeedback from './invalidFeedback'
@@ -61,61 +61,52 @@ class LogForm extends Component {
     render() {
         const { username, password, response, form } = this.state
         return (
-            <React.Fragment>
-                <ToastContainer
-                    position='top-center'
-                    autoClose={5000}
-                    closeOnClick
-                    pauseOnFocusLoss
-                    pauseOnHover
-                />
-                <Modal onClose={this.close} >
-                    <header className="row flex-space-between">
-                        <h1
-                            className={form === 'signup' ? 'text-primary' : 'text-muted cursor-pointer'}
-                            onClick={() => this.setState({ form: 'signup' })}
-                        >
-                            Sign Up
+            <Modal onClose={this.close} >
+                <header className="row flex-space-between">
+                    <h1
+                        className={form === 'signup' ? 'text-primary' : 'text-muted cursor-pointer'}
+                        onClick={() => this.setState({ form: 'signup' })}
+                    >
+                        Sign Up
                             </h1>
-                        <h1 className="text-muted">|</h1>
-                        <h1
-                            className={form === 'login' ? 'text-success' : 'text-muted cursor-pointer'}
-                            onClick={() => this.setState({ form: 'login' })}
-                        >
-                            Login
+                    <h1 className="text-muted">|</h1>
+                    <h1
+                        className={form === 'login' ? 'text-success' : 'text-muted cursor-pointer'}
+                        onClick={() => this.setState({ form: 'login' })}
+                    >
+                        Login
                             </h1>
-                    </header>
-                    <form onSubmit={this.onSubmit}>
-                        <Input
-                            label='Username'
-                            name='username'
-                            id='username'
-                            value={username}
-                            onChange={this.onChange}
-                            required
-                            autoFocus
-                        />
-                        <Input
-                            label='Password'
-                            name='password'
-                            id='password'
-                            type='password'
-                            value={password}
-                            onChange={this.onChange}
-                            required
-                        />
-                        <InvalidFeedback feedback={(response) ? response.error : null} />
-                        <section className="buttons">
-                            <button
-                                type="submit"
-                                className={form === 'signup' ? 'btn-primary' : 'btn-success'}
-                            >
-                                {form}
-                            </button>
-                        </section>
-                    </form>
-                </Modal>
-            </React.Fragment>
+                </header>
+                <form onSubmit={this.onSubmit}>
+                    <Input
+                        label='Username'
+                        name='username'
+                        id='username'
+                        value={username}
+                        onChange={this.onChange}
+                        required
+                        autoFocus
+                    />
+                    <Input
+                        label='Password'
+                        name='password'
+                        id='password'
+                        type='password'
+                        value={password}
+                        onChange={this.onChange}
+                        required
+                    />
+                    <InvalidFeedback feedback={(response) ? response.error : null} />
+                    <section className="buttons">
+                        <button
+                            type="submit"
+                            className={form === 'signup' ? 'btn-primary' : 'btn-success'}
+                        >
+                            {form}
+                        </button>
+                    </section>
+                </form>
+            </Modal>
         );
     }
 }
