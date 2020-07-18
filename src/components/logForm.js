@@ -3,6 +3,7 @@ import Http from '../http';
 import { ToastContainer, toast } from 'react-toastify';
 import Modal from './modal'
 import Input from './input'
+import InvalidFeedback from './invalidFeedback'
 
 class LogForm extends Component {
     state = {
@@ -103,9 +104,7 @@ class LogForm extends Component {
                             onChange={this.onChange}
                             required
                         />
-                        <section className='invalid-feedback'>
-                            {(response) ? response.error : ''}
-                        </section>
+                        <InvalidFeedback feedback={(response) ? response.error : null} />
                         <section className="buttons">
                             <button
                                 type="submit"

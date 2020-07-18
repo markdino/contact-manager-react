@@ -117,13 +117,6 @@ a .text-success:focus {
   width: 100%;
 }
 
-.invalid-feedback {
-  width: 100%;
-  margin-top: 0.25rem;
-  font-size: 80%;
-  color: #dc3545;
-}
-
 .cursor-pointer {
   cursor: pointer;
 }
