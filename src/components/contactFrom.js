@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Input from './input'
+import InvalidFeedback from './invalidFeedback'
 import Modal from './modal'
 import Http from '../http'
+import { toast } from 'react-toastify';
 import { ReactComponent as CameraSVG } from '../assets/svg/camera.svg'
 import UserSVG from '../assets/svg/user.svg'
 import './contactForm.css'
@@ -17,6 +19,7 @@ class ContactFrom extends Component {
         email: null,
         address: null,
         showModal: false,
+        error: null,
     }
 
     acceptAvatar = () => {
@@ -34,7 +37,7 @@ class ContactFrom extends Component {
 
     onSubmit = e => {
         e.preventDefault()
-        const { avatar, isPrivate, name, mobile, tel, email, address } = this.state
+        const { avatar, isPrivate, name, mobile, tel, email, address, error } = this.state
         const { user, api, updateContact, history } = this.props
 
         const newContact = {
@@ -54,12 +57,17 @@ class ContactFrom extends Component {
                 history.push('/')
             })
             .catch(payload => {
-                if (!payload.response) return console.log(payload)
-                console.error(payload.response.data.error)
+                if (!payload.response) {
+                    this.setState({ error: 'Server is down or connection to the server refused.' })
+                } else {
+                    this.setState({ error: payload.response.data.error })
+                }
+                if (typeof error === 'string') toast.error(error)
+
             })
     }
     render() {
-        const { avatar, isPrivate, name, mobile, tel, email, address, showModal } = this.state
+        const { avatar, isPrivate, name, mobile, tel, email, address, showModal, error } = this.state
         const userAvatar = avatar ? avatar : UserSVG
         const privateCheck = isPrivate ? { defaultChecked: true } : null
         return (
@@ -113,10 +121,15 @@ class ContactFrom extends Component {
                             <label htmlFor="private">Private</label>
                         </section>
                         <Input label='Name' name='name' value={name} onChange={this.onChange} required />
+                        <InvalidFeedback feedback={error ? error.name : null} />
                         <Input label='Mobile' type='tel' name='mobile' value={mobile} onChange={this.onChange} />
+                        <InvalidFeedback feedback={error ? error.mobile : null} />
                         <Input label='Tel.' type='tel' name='tel' value={tel} onChange={this.onChange} />
+                        <InvalidFeedback feedback={error ? error.tel : null} />
                         <Input label='Email' type='email' name='email' value={email} onChange={this.onChange} />
+                        <InvalidFeedback feedback={error ? error.email : null} />
                         <Input label='Address' name='address' value={address} onChange={this.onChange} />
+                        <InvalidFeedback feedback={error ? error.address : null} />
                     </form>
                 </main>
             </React.Fragment>
