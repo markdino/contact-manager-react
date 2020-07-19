@@ -67,7 +67,7 @@ class ContactFrom extends Component {
             })
     }
     render() {
-        const { avatar, isPrivate, name, mobile, tel, email, address, showModal, error } = this.state
+        const { avatar, newAvatar, isPrivate, name, mobile, tel, email, address, showModal, error } = this.state
         const userAvatar = avatar ? avatar : UserSVG
         const privateCheck = isPrivate ? { defaultChecked: true } : null
         return (
@@ -99,7 +99,7 @@ class ContactFrom extends Component {
                             placeholder="https://"
                             required
                             autoFocus
-                            defaultValue={avatar}
+                            value={newAvatar}
                             onChange={this.onChange} />
                         <section className="buttons">
                             <button className='btn-success' onClick={this.acceptAvatar}>
